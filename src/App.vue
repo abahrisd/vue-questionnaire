@@ -1,23 +1,27 @@
+
 <template>
-  <div id="app">
-    <main>
-    </main>
-  </div>
+  <Panel class="calculator-panel" headline="Income Tax Calculator">
+    <template>
+        <span>content goes here.</span>
+    </template>
+  </Panel>
 </template>
 
 <script>
     import Panel from './components/Panel.vue';
     import InputForm from './components/InputForm.vue';
     import Result from './components/Result.vue';
-    import { calcTaxes } from './calc.js';
+    // import { calcTaxes } from './calc';
+
     export default {
         name: 'app',
         components: {
             Panel,
             InputForm,
-            Result
-        }
+            Result,
+        },
     };
 </script>
 
+<!--<style lang="scss" src="./assets/globalStyles/_colors.scss"/>-->
 <style lang="scss" src="./assets/styles/App.scss"/>
