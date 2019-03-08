@@ -7,7 +7,7 @@
                     headline="Income Tax Calculator"
             >
                 <template>
-                    <span>content goes here.</span>
+                    <InputForm/>
                 </template>
             </Panel>
 

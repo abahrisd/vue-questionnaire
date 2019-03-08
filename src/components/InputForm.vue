@@ -1,11 +1,37 @@
-
 <template>
-
+    <form>
+        <Input
+                type="input"
+                label="Net Income"
+                validation="required|numeric"
+                v-model="inputs.incomeValue"
+                @input="input"
+        />
+    </form>
 </template>
 
 <script>
+    import Input from './Input.vue';
+
     export default {
         name: 'InputForm',
+        components: {
+            Input,
+        },
+        data() {
+            return {
+                inputs: {
+                    incomeValue: '',
+                },
+            };
+        },
+        methods: {
+            input(input) {
+                if (input.type === 'input') {
+                    this.incomeValue = input.value;
+                }
+            },
+        },
     };
 </script>
 
