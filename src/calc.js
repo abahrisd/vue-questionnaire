@@ -6,7 +6,7 @@ const calcChurchTax = (taxableValue, state) => {
     const taxRateByState = {
         BaWue: 0.08,
         Bayern: 0.08,
-        Other: 0.09
+        Other: 0.09,
     };
 
     return roundValue((JW * taxRateByState[state]) / 100);
@@ -17,44 +17,7 @@ const GFB = { single: 9000.0, married: 18000.0 };
 const incomeLines = {
     0: 13997,
     1: 54950,
-    2: 260533
-};
-
-const calcIncomeTax = (income, relationship) => {
-    const KZTAB = relationship === "single" ? 1 : 2;
-    let zvE = income;
-
-    if (KZTAB === 2) {
-        zvE = income / 2;
-    }
-
-    let ST;
-
-    const map = {
-        lowest: calcLowestIncome(zvE),
-        low: calcLowIncome(zvE, relationship),
-        medium: calcMidIncome(zvE),
-        high: calcHighIncome(zvE),
-        highest: calcHighestIncome(zvE)
-    };
-
-    if (zvE < GFB[relationship] + 1) {
-        ST = map["lowest"];
-    } else if (zvE < incomeLines[0]) {
-        ST = map["low"];
-    } else if (zvE < incomeLines[1]) {
-        ST = map["medium"];
-    } else if (zvE < incomeLines[2]) {
-        ST = map["high"];
-    } else {
-        ST = map["highest"];
-    }
-
-    if (KZTAB === 2) {
-        ST = ST * 2;
-    }
-
-    return Math.round(ST);
+    2: 260533,
 };
 
 const calcLowestIncome = income => {
@@ -74,7 +37,6 @@ const calcMidIncome = income => {
     const ST = RW + 948.49;
     return ST;
 };
-
 const calcHighIncome = income => {
     const ST = income * 0.42 - 8621.75;
     return ST;
@@ -84,11 +46,10 @@ const calcHighestIncome = income => {
     const ST = income * 0.45 - 16437.7;
     return ST;
 };
-
 const calcSoli = (taxableValue, relationship) => {
     const JBMG = taxableValue;
     // 1 = basic tarif ; 2 = splitting tarif
-    const KZTAB = relationship === "single" ? 1 : 2;
+    const KZTAB = relationship === 'single' ? 1 : 2;
     const SOLZFREI = 972 * KZTAB;
     let SOLZLZZ;
 
@@ -110,9 +71,44 @@ const calcSoli = (taxableValue, relationship) => {
 
     return roundValue(SOLZLZZ);
 };
+const calcIncomeTax = (income, relationship) => {
+    const KZTAB = relationship === 'single' ? 1 : 2;
+    let zvE = income;
 
+    if (KZTAB === 2) {
+        zvE = income / 2;
+    }
+
+    let ST;
+
+    const map = {
+        lowest: calcLowestIncome(zvE),
+        low: calcLowIncome(zvE, relationship),
+        medium: calcMidIncome(zvE),
+        high: calcHighIncome(zvE),
+        highest: calcHighestIncome(zvE),
+    };
+
+    if (zvE < GFB[relationship] + 1) {
+        ST = map.lowest;
+    } else if (zvE < incomeLines[0]) {
+        ST = map.low;
+    } else if (zvE < incomeLines[1]) {
+        ST = map.medium;
+    } else if (zvE < incomeLines[2]) {
+        ST = map.high;
+    } else {
+        ST = map.highest;
+    }
+
+    if (KZTAB === 2) {
+        ST *= 2;
+    }
+
+    return Math.round(ST);
+};
 const calcTaxes = inputs => {
-    const incomeValue = parseInt(inputs.incomeValue);
+    const incomeValue = parseInt(inputs.incomeValue, 10);
     const incomeTax = calcIncomeTax(incomeValue, inputs.relationship);
     const soli = calcSoli(incomeTax, inputs.relationship);
     const churchTax = inputs.isInChurch
@@ -125,8 +121,10 @@ const calcTaxes = inputs => {
         incomeTax,
         soli,
         churchTax,
-        netIncome
+        netIncome,
     };
 };
 
-export { calcChurchTax, calcIncomeTax, calcSoli, calcTaxes };
+export {
+    calcChurchTax, calcIncomeTax, calcSoli, calcTaxes,
+};
