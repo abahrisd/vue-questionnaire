@@ -103,7 +103,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       cacheId: 'vue-questionnaire',
       filename: 'service-worker.js',
       staticFileGlobs: ['dist/**/*.{js,html,css}'],
-      minify: true,
+      minify: false,
       stripPrefix: 'dist/'
     })
   ]
