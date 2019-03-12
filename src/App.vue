@@ -1,6 +1,7 @@
 
 <template>
-    <div id="app">
+    <div>
+        <button v-on:click="goBack">Go back</button>
         <main>
             <Panel
                     class="calculator-panel"
@@ -51,6 +52,10 @@
             resultsCalculated() {
                 return Object.keys(this.calculations).length !== 0;
             },
+            username() {
+                // Мы скоро разберём что такое `params`
+                return this.$route.params.username;
+            },
         },
         methods: {
             submitted(input) {
@@ -65,6 +70,13 @@
             },
             clearCalculations() {
                 this.calculations = {};
+            },
+            goBack() {
+                if (window.history.length) {
+                    this.$router.go(-1);
+                } else {
+                    this.$router.push('/');
+                }
             },
         },
     };
