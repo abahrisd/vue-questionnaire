@@ -9,12 +9,31 @@
         <div class="life-cycle-hooks__counter">
             <span>{{count}}</span>
         </div>
+        <div>
+            <div>Increment mf</div>
+            <div>
+                {{increment}}
+                <button v-on:click="handleIncrement">Increment it!</button>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+    import { mapState } from 'vuex';
+
     export default {
         name: 'HelloWorld',
+        computed: mapState({
+            increment() {
+                return this.$store.state.increment;
+            },
+        }),
+        methods: {
+            handleIncrement() {
+                this.$store.state.increment += 1;
+            },
+        },
         data() {
             return {
                 property: 'Blank',

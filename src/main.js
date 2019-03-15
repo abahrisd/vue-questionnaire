@@ -16,11 +16,11 @@ Vue.config.productionTip = false;
 
 const store = new Vuex.Store({
     state: {
-        count: 0,
+        increment: 0,
     },
     mutations: {
         increment(state) {
-            state.count += 1;
+            state.increment += 1;
         },
     },
 });
