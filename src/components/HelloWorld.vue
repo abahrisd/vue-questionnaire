@@ -15,15 +15,22 @@
                 {{increment}}
                 <button v-on:click="handleIncrement">Increment it!</button>
             </div>
+            <SlotButton>
+                Кнопка подтвердить
+            </SlotButton>
         </div>
     </div>
 </template>
 
 <script>
     import { mapState } from 'vuex';
+    import SlotButton from './SlotButton.vue';
 
     export default {
         name: 'HelloWorld',
+        components: {
+            SlotButton,
+        },
         computed: mapState({
             increment() {
                 return this.$store.state.increment;
