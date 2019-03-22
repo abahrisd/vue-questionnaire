@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <div class="life-cycle-hooks">
         <div>
             <span>HelloWorld!</span>
@@ -16,7 +16,12 @@
                 <button v-on:click="handleIncrement">Increment it!</button>
             </div>
             <SlotButton>
-                Кнопка подтвердить
+                <template v-slot:name1>
+                    <span class="button__first">Кнопка</span>
+                </template>
+                <template v-slot:name2>
+                    <span class="button__second">подтвердить</span>
+                </template>
             </SlotButton>
         </div>
     </div>
@@ -91,4 +96,11 @@
         font-size: 18px;
         line-height: 20px;
     }
+    .button__first {
+        color: orange;
+    }
+    .button__second {
+        color: blue;
+    }
+
 </style>

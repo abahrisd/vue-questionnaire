@@ -3,7 +3,9 @@
     <button
             v-on:click="submit"
     >
-        <slot>Подтвердить!</slot>
+        <slot name="name1">Name1</slot>
+        &nbsp;
+        <slot name="name2">Name2</slot>
     </button>
 
 </template>
