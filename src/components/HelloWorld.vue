@@ -24,17 +24,22 @@
                 </template>
             </SlotButton>
         </div>
+        <div>
+            <GorgeousButton v-on:gorgeous-click="onGorgeousClick($event)">Gorgeous!</GorgeousButton>
+        </div>
     </div>
 </template>
 
 <script>
     import { mapState } from 'vuex';
     import SlotButton from './SlotButton.vue';
+    import GorgeousButton from './GorgeousButton.vue';
 
     export default {
         name: 'HelloWorld',
         components: {
             SlotButton,
+            GorgeousButton,
         },
         computed: mapState({
             increment() {
@@ -44,6 +49,9 @@
         methods: {
             handleIncrement() {
                 this.$store.state.increment += 1;
+            },
+            onGorgeousClick(data) {
+                console.log('Gorgeous!', data);
             },
         },
         data() {
@@ -63,9 +71,9 @@
             this.property = 'Example property update.';
             console.log('Hello world: created');
 
-            setInterval(() => {
+            /*setInterval(() => {
                 this.count += 1;
-            }, 1000);
+            }, 1000);*/
         },
         updated() {
             this.property = `Count: ${this.count}`;
@@ -91,7 +99,6 @@
     .life-cycle-hooks {
         margin-left: 20px;
     }
-
     .life-cycle-hooks__counter {
         font-size: 18px;
         line-height: 20px;
@@ -102,5 +109,4 @@
     .button__second {
         color: blue;
     }
-
 </style>
