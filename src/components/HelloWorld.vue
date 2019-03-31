@@ -71,9 +71,9 @@
             this.property = 'Example property update.';
             console.log('Hello world: created');
 
-            /*setInterval(() => {
+            /* setInterval(() => {
                 this.count += 1;
-            }, 1000);*/
+            }, 1000); */
         },
         updated() {
             this.property = `Count: ${this.count}`;
